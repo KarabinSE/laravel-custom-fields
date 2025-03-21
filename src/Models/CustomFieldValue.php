@@ -22,6 +22,7 @@ class CustomFieldValue extends Model
         'value',
         'customizable_id',
         'customizable_type',
+        'locale',
     ];
 
     protected static function newFactory(): Factory
