@@ -18,6 +18,6 @@ class ModelObserver
 
     public function retrieved(Model $model): void
     {
-        $model->loadCustomFieldValues();
+        // $model->loadCustomFieldValues();
     }
 }

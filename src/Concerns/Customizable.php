@@ -37,8 +37,7 @@ trait Customizable
     public function customFieldValues(): MorphMany
     {
         return $this->morphMany(CustomFieldValue::class, 'customizable')
-            ->where('locale', app()->getLocale())
-            ->orWhereNull('locale');
+            ->where('locale', app()->getLocale());
     }
 
     /**
@@ -63,7 +62,6 @@ trait Customizable
         $validator = Validator::make($unvalidatedCustomFields, $customFieldsRules);
         $this->validatedCustomFieldValues = $validator->validate();
     }
-
 
     /**
      * Get the custom fields associated with the model.
@@ -115,6 +113,7 @@ trait Customizable
                 ];
                 if (is_null($value)) {
                     CustomFieldValue::where($constraints)->delete();
+
                     return;
                 }
                 $values = ['value' => $value];
@@ -133,6 +132,7 @@ trait Customizable
                 $attribute = "custom_{$customField->key}";
                 $this->setAttribute($attribute, $customField->default_value);
             });
+
             return;
         }
 
