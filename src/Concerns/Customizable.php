@@ -36,7 +36,9 @@ trait Customizable
      */
     public function customFieldValues(): MorphMany
     {
-        return $this->morphMany(CustomFieldValue::class, 'customizable');
+        return $this->morphMany(CustomFieldValue::class, 'customizable')
+            ->where('locale', app()->getLocale())
+            ->orWhereNull('locale');
     }
 
     /**
@@ -108,7 +110,8 @@ trait Customizable
                 $constraints = [
                     'custom_field_id' => $customField->id,
                     'customizable_type' => $this->getMorphClass(),
-                    'customizable_id' => $this->id
+                    'customizable_id' => $this->id,
+                    'locale' => app()->getLocale(),
                 ];
                 if (is_null($value)) {
                     CustomFieldValue::where($constraints)->delete();

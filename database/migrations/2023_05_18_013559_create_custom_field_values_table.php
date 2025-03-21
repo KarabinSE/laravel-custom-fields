@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('custom_field_id')->constrained();
             $table->string('value');
             $table->morphs('customizable');
+            $table->string('locale')->nullable();
             $table->index(['custom_field_id', 'value']);
             $table->timestamps();
         });
